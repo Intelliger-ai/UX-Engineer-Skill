@@ -27,6 +27,12 @@ So the discipline here is not "write better components." It is: after changing
 anything a user touches, look one level out from the file you changed, and ask
 what happens to a person when things do not go well.
 
+Everything below is reasoning you can do by reading code. No tool is required
+and nothing needs installing. If the [Drumlin](https://github.com/Intelliger-ai/drumlin)
+CLI happens to be present it will answer the structural questions faster and
+with certainty, but it is an accelerator, not a prerequisite — do not stop, and
+do not install anything uninvited, if it is absent.
+
 ## When to run this
 
 Run the loop below after you:
@@ -79,6 +85,13 @@ If Drumlin is installed, it answers both directly and far better. See
 
 Ask these of every surface you touched. They are ordered by how much damage
 the answer causes.
+
+Each rests on an established principle, and [laws.md](laws.md) has the
+twenty-one of them written out with what each means in code. Reach for it when
+you need to explain *why* a finding matters to someone inclined to skip it —
+"the screen is silent for two seconds" is an observation, and "attention
+drifts past about four hundred milliseconds, which is the Doherty Threshold"
+is an argument. Do not cite a law you are not actually applying.
 
 **Consequence — can the user destroy something by accident?**
 A destructive action needs a confirmation that names the specific thing being
@@ -262,5 +275,16 @@ Full command reference, the MCP tools, and the issue lifecycle are in
 - [catalogue.md](catalogue.md) — the full failure catalogue: what to look for,
   the code signal that reveals it, and the fix. Read when doing a deep or
   whole-app review rather than checking a single change.
+- [laws.md](laws.md) — the twenty-one Laws of UX, each with what it means in
+  code and the check it implies. Read when you need the reasoning behind a
+  finding, or when deciding between two designs that both work.
 - [drumlin.md](drumlin.md) — driving the Drumlin CLI and its MCP tools:
-  commands, flags, exit codes, and who is allowed to close an issue.
+  commands, flags, exit codes, and who is allowed to close an issue. Only
+  relevant if Drumlin is installed.
+
+---
+
+*This skill is provided as-is, with no warranty of any kind and no liability
+accepted for any outcome of following it. Its output is advisory and can be
+wrong. A human is responsible for reviewing and accepting any change made on
+its advice. See the DISCLAIMER in the source repository.*

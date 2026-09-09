@@ -37,7 +37,9 @@ drumlin rules                      # the active rules
 
 `--changed` narrows what you are shown, not what was examined. Analysis is
 always whole-graph, because reachability is global — a screen can be orphaned
-by an edit three directories away.
+by an edit three directories away. Bare, it means the git working tree; given
+a revision — `drumlin check --changed main` — it means everything since that
+point, which is the one to use when reviewing a branch.
 
 Useful flags across commands:
 
@@ -116,6 +118,12 @@ the finding is actually gone. It exits non-zero if it is not — so a failing
 claim tells you your fix did not work, which is worth knowing before you end
 the turn. It does not read your note, so there is nothing to phrase carefully.
 
+**Do not add `--format json` to `claim` or `verify` if you intend to check the
+exit code.** In JSON mode both commands exit 0 whatever the outcome, so a fix
+that did not work looks like success. Read the `outcome` field instead, or
+leave the format alone and trust the exit code. This is the one place where
+the convenient thing quietly reports the wrong answer.
+
 Verification has four outcomes, and only the first resolves anything:
 
 | Outcome | Meaning |
@@ -165,6 +173,14 @@ directories away — and reading the page file tells you nothing about them.
 Rename or remove a route without checking and you leave a dead link the type
 checker will not catch.
 
+All four return prose, not JSON. Read the text; do not try to parse it.
+
+They also refuse to run unless the project has been initialised *and*
+activated. If a tool comes back saying the project is not activated, that is a
+human's decision to make — `drumlin activate` is how a person says they want
+this repository analysed. Report it and fall back to the CLI, which is not
+gated, or to reading the code yourself.
+
 There is no tool for accepting, closing, or resolving. That is not an
 oversight.
 
@@ -202,6 +218,13 @@ drumlin export --to github --out issues.sh    # a gh issue create script
 drumlin export --to markdown
 drumlin export --to linear --new              # only what has not been sent yet
 ```
+
+Use `--to`. On this one command `--format` is an alias for the export target
+rather than the output format, so `--format json` fails with an unknown
+target. Without `--out` the body goes to stdout.
+
+Exporting does not close anything in Drumlin. An issue closed in Linear is
+still open here until it is verified.
 
 ## When something looks wrong
 
