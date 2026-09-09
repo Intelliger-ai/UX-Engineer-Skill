@@ -47,7 +47,35 @@ Run the loop below after you:
 Also run it when someone reports a flow as slow, confusing, janky, broken, or
 unfinished. Those words usually describe a missing state, not a bug.
 
+## While you build
+
+Most of this is cheapest at the moment of writing and expensive an hour later,
+because by then the fix is a rewrite and the context is gone. These are the
+moves that cost nothing in the same edit. Apply them as you go; do not defer
+them to the review pass, and never leave them as a `TODO`.
+
+| When you write | Do this in the same edit |
+| --- | --- |
+| a control that triggers a request | disable it and show it is working |
+| a `catch` | decide what the user sees and what they can do next |
+| `router.push` from a screen with filters or a search | carry the search params through |
+| a `<select>` bound to an array of unknown length | add search or grouping |
+| a destructive handler | add a confirmation that names the target |
+| a new component | search for the existing primitive first |
+| a form field | set `autocomplete`, then ask if it can be inferred or removed |
+| a terminal or success screen | add the onward action |
+| a dynamic route | add the not-found path |
+| a second primary button | demote one of them |
+| a fetch | write the empty and error branches beside the loaded one |
+
+[laws.md](laws.md) opens with a table mapping what you are building — a form,
+a table, a checkout, a dashboard — to the principles that apply to it. Read
+that row before starting something substantial. It takes a moment and changes
+what you write.
+
 ## The loop
+
+After the change is made, review it:
 
 ```
 1. Neighbourhood  — find what connects to the thing you changed
@@ -275,9 +303,13 @@ Full command reference, the MCP tools, and the issue lifecycle are in
 - [catalogue.md](catalogue.md) — the full failure catalogue: what to look for,
   the code signal that reveals it, and the fix. Read when doing a deep or
   whole-app review rather than checking a single change.
-- [laws.md](laws.md) — the twenty-one Laws of UX, each with what it means in
-  code and the check it implies. Read when you need the reasoning behind a
-  finding, or when deciding between two designs that both work.
+- [laws.md](laws.md) — the twenty-one Laws of UX. Opens with a table mapping
+  what you are building to the laws that apply, and the five that matter most
+  under speed. Each law then gives the principle, what it means in code,
+  explicit directives for what to do while writing, the check, and the way
+  fast AI-assisted development specifically breaks it. Read the relevant row
+  before building something substantial, and the full entry when you need the
+  reasoning behind a finding.
 - [drumlin.md](drumlin.md) — driving the Drumlin CLI and its MCP tools:
   commands, flags, exit codes, and who is allowed to close an issue. Only
   relevant if Drumlin is installed.

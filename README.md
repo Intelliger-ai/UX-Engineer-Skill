@@ -65,6 +65,21 @@ check it implies.
 | **Cognitive biases** | Peak-End Rule · Serial Position Effect · Von Restorff Effect · Zeigarnik Effect |
 | **Principles** | Doherty Threshold · Occam's Razor · Pareto Principle · Postel's Law · Tesler's Law |
 
+They are written to be executed, not admired. Each law carries the principle,
+what it means in an implementation, explicit directives for what to do while
+writing code, the check that verifies it, and the way fast AI-assisted
+development specifically breaks it — plus the real numbers, since a threshold
+you can test against beats a principle you can nod at: 400ms before attention
+drifts, 44×44px touch targets, `RT = a + b·log₂(n+1)` for choice.
+
+The file opens with two things worth more than the laws themselves. A table
+mapping **what you are building** — a form, a table, a checkout, a dashboard,
+a destructive action — to the laws that apply to it, so the reference is
+usable mid-task rather than after. And **the five that matter most when moving
+fast**: Tesler, Doherty, Peak-End, Jakob, Hick, which between them cover most
+of what goes wrong when code arrives faster than anyone can consider what
+surrounds it.
+
 The point is to give a finding a reason rather than an assertion. "The screen
 is silent for two seconds" is an observation; "attention drifts past about four
 hundred milliseconds, which is the Doherty Threshold" is an argument, and an
@@ -74,7 +89,20 @@ decorating an opinion with a psychologist's name is not evidence.
 
 Tesler's Law does the most work in practice. Every missing error state,
 absent not-found handler, and forgotten filter is irreducible complexity the
-code declined to absorb, so a person carries it instead.
+code declined to absorb, so a person carries it instead. The skill's version
+of it is a sentence to watch for in your own reasoning: *"the user can just —"*
+is this law being violated, every time.
+
+### Applied while building, not only after
+
+The review loop runs after a change, but most of this is cheapest at the
+moment of writing and expensive an hour later, when the fix is a rewrite and
+the context is gone. So the skill carries a table of same-edit moves: write a
+control that triggers a request and the pending state goes in the same edit;
+write a `catch` and decide what the user sees and what they can do next; write
+`router.push` from a screen with filters and carry the params. A pending state
+deferred is a pending state never written, and that is the actual failure mode
+of building fast.
 
 ## It does not need Drumlin
 
